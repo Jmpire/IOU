@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:projectx/utils/handle_table.dart';
 import 'package:projectx/values/app_colors.dart';
+import 'package:projectx/views/home_screen.dart';
 
-import '../main.dart';
 class Iou extends StatefulWidget {
   static bool tableExists = false;
   static int count = 0;

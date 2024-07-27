@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:projectx/utils/styles.dart';
 import 'package:projectx/values/app_colors.dart';
+import 'package:projectx/views/home_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -27,10 +27,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 150),
       margin: const EdgeInsets.symmetric(horizontal: 5.0),
-      height: isActive ? 13.0 : 10.0,
-      width: isActive ? 13.0 : 10.0,
+      height: isActive ? 13.0 : 13.0,
+      width: isActive ? 13.0 : 13.0,
       decoration: BoxDecoration(
-        color: isActive ? AppColors.background : Colors.grey,
+        color: isActive ? AppColors.orange : Colors.grey,
         borderRadius: const BorderRadius.all(Radius.circular(360)),
       ),
     );
@@ -49,12 +49,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  height: 15,
-                ),
-                Image.asset(
-                  "assets/logo.jpg",
-                  width: 60,
-                  height: 63,
+                  height: 70,
                 ),
                 SizedBox(
                   height: screenHeight * 0.7,
@@ -67,15 +62,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       });
                     },
                     children: <Widget>[
-                      getPageSection('assets/logo.jpg', 'Track Debt',
-                          '#############', screenHeight),
-                      getPageSection('assets/logo.jpg', 'Track Credit',
-                          '#############', screenHeight),
-                      getPageSection(
-                          'assets/logo.jpg',
-                          'Stay in Control',
-                          '##############',
-                          screenHeight)
+                      getPageSection(Icons.money_off_csred_rounded,
+                          'Track Debt', 'Know which people you owe money so that you can pay it back right in time.', screenHeight),
+                      getPageSection(Icons.money_rounded, 'Track Credit',
+                          'Know who owes you money so that you remember to get it back.', screenHeight),
+                      getPageSection(Icons.security_rounded, 'Stay in Control',
+                          'Take complete control of your finances like never before', screenHeight)
                     ],
                   ),
                 ),
@@ -93,21 +85,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   duration: const Duration(milliseconds: 400),
                                   curve: Curves.ease);
                             },
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
                                 Text(
                                   'Next',
                                   style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 22.0,
+                                    color: AppColors.background,
+                                    fontSize: 20.0,
                                   ),
                                 ),
-                                SizedBox(width: 10.0),
+                                const SizedBox(width: 10.0),
                                 Icon(
                                   Icons.arrow_forward_outlined,
-                                  color: Colors.black,
+                                  color: AppColors.background,
                                 ),
                               ],
                             ),
@@ -124,7 +116,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           color: Colors.white,
           child: _currentPage == _numPages - 1
               ? InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreen()));
+                  },
                   child: Container(
                       height: 50.0,
                       padding: const EdgeInsets.all(15.0),
@@ -134,8 +131,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           borderRadius: BorderRadius.circular(5.0)),
                       child: const Center(
                           child: Text(
-                        'GET STARTED',
-                        style: TextStyle(color: Colors.white, letterSpacing: 2),
+                        'Get Started',
+                        style: TextStyle(color: Colors.white),
                       ))))
               : const Text(''),
         ));
@@ -143,24 +140,28 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   // get different page sections
   Widget getPageSection(
-      String image, String title, String description, double screenHeight) {
+      IconData image, String title, String description, double screenHeight) {
     return Padding(
       padding: const EdgeInsets.all(40.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Center(
-              child: Image.asset(
+              child: Icon(
             image,
-            height: screenHeight * 0.4,
+            size: screenHeight * 0.35,
+            color: AppColors.background,
           )),
           const SizedBox(height: 30.0),
-          Text(title, style: headerBlackMedium, textAlign: TextAlign.center),
-          const SizedBox(height: 15.0),
-          Text(
-              'Get powerful insights on how your business has been performing and AI powered predictions.',
-              style: headerBlackSmall,
+          Text(title,
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25),
               textAlign: TextAlign.center),
+          const SizedBox(height: 15.0),
+          Text(description,
+              style: const TextStyle(color: Colors.grey), textAlign: TextAlign.center),
         ],
       ),
     );
