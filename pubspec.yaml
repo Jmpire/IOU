@@ -1,0 +1,29 @@
+name: projectx
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.3.3 <4.0.0'
+
+dependencies:
+  currency_picker: ^2.0.21
+  flutter:
+    sdk: flutter
+  http: ^1.2.2
+  lottie: ^3.1.2
+  path: ^1.9.0
+  shared_preferences: ^2.2.3
+  sqflite: ^2.3.3+1
+  syncfusion_flutter_charts: ^24.1.46+1
+  wave: ^0.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
